@@ -32,19 +32,12 @@ class FilterResponse(object):
                 switcher = {
                     'TinyURL': shorter.tinyUrl,
                     'Chilp.it': shorter.chilpit,
-                    'Da.gd': shorter.dagd
+                    'Da.gd': shorter.dagd,
                 }
                 func = switcher.get(shortenerType, lambda: "Invalid shortener! Please try again.")
                 return func()
-        except:
-                print("\nInvalid URL! Please try again.")
-                input("Click any key to restart...")
-
-                os.system("python cli_pyus.py")
-                print ("Restarting...")
-                time.sleep(0.2) # 200ms to CTR+C twice
-    
-                return quit()
+        except:    
+                return self.invalid_restart()
     
     # Method to expand shorten url
     def get_expand_url(self):
@@ -56,15 +49,19 @@ class FilterResponse(object):
                 urlExpander = requests.head(expandUrl, allow_redirects=True).url
                 return urlExpander
         except:
+            return self.invalid_restart()
+    
+    def invalid_restart(self):
             print("\nInvalid URL! Please try again.")
             input("Click any key to restart...")
-
-            os.system("python cli_pyus.py")
             print ("Restarting...")
-            time.sleep(0.2) # 200ms to CTR+C twice
-    
+            os.system("python cli_pyus.py")
+            time.sleep(0.2) 
+
             return quit()
-    
+
+
+
 
 # Class to handle shortener type
 class ShortenerType(object):
@@ -108,10 +105,13 @@ class PromptQuestion(object):
             expandResponse = FilterResponse(response_expand_type)
             return expandResponse.get_expand_url()
         else:
+            return self.exiting_cli()
+
+    def exiting_cli(self):
             print("\nExiting...")
             print ("Bye!")
             time.sleep(0.2)
-            return exit()
+            exit()
 
 # Main function
 if __name__ == '__main__':
