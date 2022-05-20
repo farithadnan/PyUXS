@@ -1,0 +1,7 @@
+[
+    {
+        "type": "input",
+        "name": "url",
+        "message": "Input URL that you want to expand (e.g. https://tinyurl.com/bjnwp7u)"
+    }
+]

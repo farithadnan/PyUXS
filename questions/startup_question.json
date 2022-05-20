@@ -1,0 +1,8 @@
+[
+    {
+        "type": "list",
+        "name": "mode_type",
+        "message": "Do you want to shorten or expand the URL?",
+        "choices": ["Shorten", "Expand"]
+    }
+]

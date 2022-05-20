@@ -8,6 +8,6 @@
     {
         "type": "input",
         "name": "url",
-        "message": "What URL you want to shorten? (e.g. https://www.google.com)"
+        "message": "Input URL you that want to shorten (e.g. https://www.google.com)"
     }
 ]
