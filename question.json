@@ -1,0 +1,13 @@
+[
+    {
+        "type": "list",
+        "name": "shortener_src",
+        "message": "What type of URL shortener, you want to use?",
+        "choices": ["TinyURL", "Chilp.it", "Da.gd", "Bitly (API Setup Needed)", "Adf.ly (API Setup Needed)"]
+    },
+    {
+        "type": "input",
+        "name": "url",
+        "message": "What URL you want to shorten? (e.g. https://www.google.com)"
+    }
+]

@@ -1,0 +1,11 @@
+[
+    {
+        "bitly": {
+            "api_key": "YOUR_API_KEY"
+        },
+        "adfly": {
+            "api_key": "YOUR_API_KEY",
+            "user_id": "YOUR_USER_ID"
+        }
+    }
+]
