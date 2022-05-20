@@ -1,6 +1,8 @@
 from __future__ import print_function, unicode_literals
+import os
 import sys
 import json
+import time
 import requests
 import pyshorteners
 from PyInquirer import prompt
@@ -26,6 +28,7 @@ class FilterResponse(object):
             shorter = ShortenerType(shortenerUrl)
 
             if response.status_code != 404:
+                print("\nDone! Here's your shortened URL:")
                 switcher = {
                     'TinyURL': shorter.tinyUrl,
                     'Chilp.it': shorter.chilpit,
@@ -34,7 +37,14 @@ class FilterResponse(object):
                 func = switcher.get(shortenerType, lambda: "Invalid shortener! Please try again.")
                 return func()
         except:
-                return "Invalid URL! Please try again."
+                print("\nInvalid URL! Please try again.")
+                input("Click any key to restart...")
+
+                os.system("python cli_pyus.py")
+                print ("Restarting...")
+                time.sleep(0.2) # 200ms to CTR+C twice
+    
+                return quit()
     
     # Method to expand shorten url
     def get_expand_url(self):
@@ -42,10 +52,18 @@ class FilterResponse(object):
         try:
             response = requests.get(expandUrl)
             if response.status_code != 404:
+                print("\nDone! Here's your expanded URL:")
                 urlExpander = requests.head(expandUrl, allow_redirects=True).url
                 return urlExpander
         except:
-            return "Invalid URL! Please try again."
+            print("\nInvalid URL! Please try again.")
+            input("Click any key to restart...")
+
+            os.system("python cli_pyus.py")
+            print ("Restarting...")
+            time.sleep(0.2) # 200ms to CTR+C twice
+    
+            return quit()
     
 
 # Class to handle shortener type
@@ -82,21 +100,26 @@ class PromptQuestion(object):
             # process to shorten url
             shortenResponse = FilterResponse(response_shortener_type)
             return shortenResponse.get_shorten_url()
-        else:
+        elif (self.modeType == 'Expand'):
             question_expand_type = json.loads(open('questions/expand_question.json').read())
             response_expand_type = prompt(question_expand_type)
 
             # process to expand url
             expandResponse = FilterResponse(response_expand_type)
             return expandResponse.get_expand_url()
-    
+        else:
+            print("\nExiting...")
+            print ("Bye!")
+            time.sleep(0.2)
+            return exit()
 
 # Main function
 if __name__ == '__main__':
 
     # Welcome message
     cprint(figlet_format('PyUXS', font='slant'))
-    print("Welcome to PyUXS!\n")
+    print("\tWelcome to PyUXS!")
+    print("(Python URL Expander & Shortener)\n")
 
     # Startup questions
     question_mode_type = json.loads(open('questions/startup_question.json').read())
