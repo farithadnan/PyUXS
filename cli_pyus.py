@@ -111,6 +111,7 @@ class PromptQuestion(object):
             return GlobalHelper.exiting_cli()
 
 
+
 class GlobalHelper:
     # existing function
     def exiting_cli():
@@ -125,11 +126,12 @@ class GlobalHelper:
         time.sleep(0.2)
         os.system("python cli_pyus.py")
         time.sleep(0.2)
+        return quit()
 
     # invalid restart func
     def invalid_restart():
         print("\nInvalid URL! Please try again.")
-        input("Click any key to restart...")
+        input("Click any key to restart...\n")
         print ("Restarting...")
         os.system("python cli_pyus.py")
         time.sleep(0.2) 
