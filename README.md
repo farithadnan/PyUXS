@@ -1,15 +1,7 @@
 <div id="top"></div>
 
 <p align="center">
- ________  ___    ___ ___  ___     ___    ___ ________      
-|\   __  \|\  \  /  /|\  \|\  \   |\  \  /  /|\   ____\     
-\ \  \|\  \ \  \/  / | \  \\\  \  \ \  \/  / | \  \___|_    
- \ \   ____\ \    / / \ \  \\\  \  \ \    / / \ \_____  \   
-  \ \  \___|\/  /  /   \ \  \\\  \  /     \/   \|____|\  \  
-   \ \__\ __/  / /      \ \_______\/  /\   \     ____\_\  \ 
-    \|__||\___/ /        \|_______/__/ /\ __\   |\_________\
-         \|___|/                  |__|/ \|__|   \|_________|
-                                                            
+ <img src="https://github.com/farithadnan/PyUXS/blob/master/img/PyUXS-banner.png" alt=" logo" width="500px"/>                                                           
 </p>                                                           
 
 <!-- ABOUT THE PROJECT -->
@@ -66,7 +58,7 @@ _Below is an example of how you can setup this project within your local environ
 
 ## References 
 <details>
-  <summary>References: </summary>
+  <summary>References that being used: </summary>
   <ol>  
     <li>
       Libraries Related
