@@ -37,7 +37,7 @@ class FilterResponse(object):
                 func = switcher.get(shortenerType, lambda: "Invalid shortener! Please try again.")
                 return func()
         except:    
-                return self.invalid_restart()
+                return GlobalHelper.invalid_restart()
     
     # Method to expand shorten url
     def get_expand_url(self):
@@ -49,16 +49,8 @@ class FilterResponse(object):
                 urlExpander = requests.head(expandUrl, allow_redirects=True).url
                 return urlExpander
         except:
-            return self.invalid_restart()
+            return GlobalHelper.invalid_restart()
     
-    def invalid_restart(self):
-            print("\nInvalid URL! Please try again.")
-            input("Click any key to restart...")
-            print ("Restarting...")
-            os.system("python cli_pyus.py")
-            time.sleep(0.2) 
-
-            return quit()
 
 
 
@@ -82,36 +74,69 @@ class ShortenerType(object):
         return self.shortener.dagd.short(self.url)
 
 
+
 # Prompt questions to determine whether to shorten or expand url
 class PromptQuestion(object):
-    def __init__(self, modeType):
-        self.modeType = modeType['mode_type']
+    def __init__(self, response):
+        self.userResponse = response
 
     # Filter user response, and filter based on user option
     def filterResponse(self):
-        
-        if (self.modeType == 'Shorten'):
-            question_shortener_type = json.loads(open('questions/shorten_question.json').read())
-            response_shortener_type = prompt(question_shortener_type)
+        if ('mode_type' in self.userResponse):
 
-            # process to shorten url
-            shortenResponse = FilterResponse(response_shortener_type)
-            return shortenResponse.get_shorten_url()
-        elif (self.modeType == 'Expand'):
-            question_expand_type = json.loads(open('questions/expand_question.json').read())
-            response_expand_type = prompt(question_expand_type)
+            if (self.userResponse['mode_type'] == 'Shorten'):
+                question_shortener_type = json.loads(open('questions/shorten_question.json').read())
+                response_shortener_type = prompt(question_shortener_type)
 
-            # process to expand url
-            expandResponse = FilterResponse(response_expand_type)
-            return expandResponse.get_expand_url()
+                # process to shorten url
+                shortenResponse = FilterResponse(response_shortener_type)
+                return shortenResponse.get_shorten_url()
+            elif (self.userResponse['mode_type'] == 'Expand'):
+                question_expand_type = json.loads(open('questions/expand_question.json').read())
+                response_expand_type = prompt(question_expand_type)
+
+                # process to expand url
+                expandResponse = FilterResponse(response_expand_type)
+                return expandResponse.get_expand_url()
+            else:
+                return GlobalHelper.exiting_cli()
+
+        elif ('endgame' in self.userResponse):
+            if (self.userResponse['endgame'] == 'Yes'):
+                return GlobalHelper.restarting_cli()
+            elif (self.userResponse['endgame'] == 'No'):
+                return GlobalHelper.exiting_cli()
+    
         else:
-            return self.exiting_cli()
+            return GlobalHelper.exiting_cli()
 
-    def exiting_cli(self):
-            print("\nExiting...")
-            print ("Bye!")
-            time.sleep(0.2)
-            exit()
+
+class GlobalHelper:
+    # existing function
+    def exiting_cli():
+        print("\nExiting...")
+        print ("Bye!")
+        time.sleep(0.2)
+        exit()
+
+    # restart function
+    def restarting_cli():
+        print("\nRestarting...")
+        time.sleep(0.2)
+        os.system("python cli_pyus.py")
+        time.sleep(0.2)
+
+    # invalid restart func
+    def invalid_restart():
+        print("\nInvalid URL! Please try again.")
+        input("Click any key to restart...")
+        print ("Restarting...")
+        os.system("python cli_pyus.py")
+        time.sleep(0.2) 
+
+        return quit()
+
+
 
 # Main function
 if __name__ == '__main__':
@@ -128,8 +153,13 @@ if __name__ == '__main__':
     # Process user response and process url
     fetchObj = PromptQuestion(response_mode_type)
     finalResult = fetchObj.filterResponse()
-    print(finalResult)
+    print(finalResult + "\n")
 
+    # End Msg Confirmation
+    question_end_msg = json.loads(open('questions/endgame_question.json').read())
+    response_end_msg = prompt(question_end_msg)
+    promptObj = PromptQuestion(response_end_msg)
+    promptObj.filterResponse()
 
 
 # https://learnpython.com/blog/how-to-use-virtualenv-python/

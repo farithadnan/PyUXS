@@ -1,0 +1,8 @@
+[
+    {
+        "type": "list",
+        "name": "endgame",
+        "message": "Do you want to keep using this tools?",
+        "choices": ["Yes", "No"]
+    }
+]
