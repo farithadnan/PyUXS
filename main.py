@@ -163,9 +163,3 @@ if __name__ == '__main__':
     promptObj = PromptQuestion(response_end_msg)
     promptObj.filterResponse()
 
-
-# https://learnpython.com/blog/how-to-use-virtualenv-python/
-# https://www.askpython.com/python/examples/url-shortener
-# https://pyshorteners.readthedocs.io/en/latest/apis.html
-# https://medium.com/@nabulovivian2014/how-i-created-a-command-line-application-with-python-edf332b8d414
-# https://realpython.com/pyinstaller-python/
