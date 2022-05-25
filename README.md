@@ -8,6 +8,9 @@
 ## About PyUXS
 `PyUXS` (Python URLs Expander & Shortener) is a CLI tools for shortening or expanding URLs. `Shortener`, as the name suggests, is a service to help reduce the length of the URL so that it can be shared easily on other platform and as for `Expander`, is a service to expand the shortended URL, it also help user to determine whether the destination of a shortened URL is save or not to visit. 
 
+`PyUXS` uses `"TinyURL", "Chilp.it", "Da.gd"` for its shortener services. This is because the API intergration for these shortener is way easier and doesn't require any `Key token` to use.
+
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -28,7 +31,7 @@ Necessary tools and libraries to have:
 * termcolor
 * pyfiglet
 
-### How to Run
+### How to Run 
 
 _Below is an example of how you can setup this project within your local environtment._
 
