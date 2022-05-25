@@ -3,7 +3,7 @@
         "type": "list",
         "name": "shortener_src",
         "message": "What type of URL shortener, you want to use?",
-        "choices": ["TinyURL", "Chilp.it", "Da.gd", "Bitly (API Setup Needed)", "Adf.ly (API Setup Needed)"]
+        "choices": ["TinyURL", "Chilp.it", "Da.gd"]
     },
     {
         "type": "input",

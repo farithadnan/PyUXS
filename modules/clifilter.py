@@ -1,3 +1,4 @@
+import json
 import requests
 import pyshorteners
 from modules.clihelper import GlobalHelper
@@ -14,7 +15,7 @@ class UserResponseFilter(object):
     def get_shorten_url(self):
         shortenerType = self.userResponse['shortener_src']
         shortenerUrl = self.userResponse['url']
-
+        
         try:
             response = requests.get(shortenerUrl)
             shorter = ShortenerTypeFilter(shortenerUrl)
@@ -62,3 +63,6 @@ class ShortenerTypeFilter(object):
     # Da.gd shortener
     def dagd(self):
         return self.shortener.dagd.short(self.url)
+
+
+
